@@ -1,0 +1,291 @@
+/* ===============================
+   Google Font
+==================================*/
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* ===============================
+   Global Styles
+==================================*/
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#4facfe,#00f2fe);
+    overflow:hidden;
+}
+
+/* ===============================
+   Main Container
+==================================*/
+.container{
+    width:100%;
+    max-width:1100px;
+    padding:20px;
+}
+
+/* ===============================
+   Chat Box
+==================================*/
+.chat-box{
+    width:100%;
+    max-width:500px;
+    height:700px;
+    margin:auto;
+    background:rgba(255,255,255,.15);
+    backdrop-filter:blur(20px);
+    border-radius:25px;
+    box-shadow:0 15px 35px rgba(0,0,0,.25);
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+}
+
+/* ===============================
+   Header
+==================================*/
+.header{
+    background:#1f2937;
+    color:#fff;
+    padding:20px;
+    text-align:center;
+    border-bottom:1px solid rgba(255,255,255,.1);
+}
+
+.header h1{
+    font-size:28px;
+    font-weight:600;
+}
+
+.header p{
+    margin-top:5px;
+    font-size:14px;
+    color:#d1d5db;
+}
+
+/* ===============================
+   Chat Area
+==================================*/
+#chat-area{
+    flex:1;
+    padding:20px;
+    overflow-y:auto;
+    scroll-behavior:smooth;
+}
+
+/* Scrollbar */
+#chat-area::-webkit-scrollbar{
+    width:7px;
+}
+
+#chat-area::-webkit-scrollbar-thumb{
+    background:#4facfe;
+    border-radius:20px;
+}
+
+#chat-area::-webkit-scrollbar-track{
+    background:transparent;
+}
+
+/* ===============================
+   Messages
+==================================*/
+.message{
+    max-width:75%;
+    padding:12px 18px;
+    margin:12px 0;
+    border-radius:18px;
+    line-height:1.6;
+    word-wrap:break-word;
+    animation:fadeIn .35s ease;
+    font-size:15px;
+}
+
+.bot{
+    background:#ffffff;
+    color:#333;
+    border-bottom-left-radius:5px;
+    align-self:flex-start;
+    box-shadow:0 5px 10px rgba(0,0,0,.08);
+}
+
+.user{
+    background:#2563eb;
+    color:white;
+    margin-left:auto;
+    border-bottom-right-radius:5px;
+    box-shadow:0 5px 10px rgba(0,0,0,.15);
+}
+
+/* ===============================
+   Input Area
+==================================*/
+.input-area{
+    display:flex;
+    padding:18px;
+    background:rgba(255,255,255,.2);
+    border-top:1px solid rgba(255,255,255,.15);
+}
+
+.input-area input{
+    flex:1;
+    border:none;
+    outline:none;
+    padding:15px;
+    border-radius:30px;
+    font-size:15px;
+    background:white;
+}
+
+.input-area input::placeholder{
+    color:#777;
+}
+
+.input-area button{
+    margin-left:10px;
+    border:none;
+    outline:none;
+    padding:15px 24px;
+    border-radius:30px;
+    cursor:pointer;
+    background:#2563eb;
+    color:white;
+    font-size:15px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.input-area button:hover{
+    background:#1d4ed8;
+    transform:scale(1.05);
+}
+
+/* ===============================
+   Typing Animation
+==================================*/
+.typing{
+    display:flex;
+    align-items:center;
+    gap:5px;
+    padding:10px 15px;
+}
+
+.typing span{
+    width:8px;
+    height:8px;
+    background:#888;
+    border-radius:50%;
+    animation:typing 1.2s infinite;
+}
+
+.typing span:nth-child(2){
+    animation-delay:.2s;
+}
+
+.typing span:nth-child(3){
+    animation-delay:.4s;
+}
+
+@keyframes typing{
+    0%{
+        transform:translateY(0);
+        opacity:.5;
+    }
+    50%{
+        transform:translateY(-6px);
+        opacity:1;
+    }
+    100%{
+        transform:translateY(0);
+        opacity:.5;
+    }
+}
+
+/* ===============================
+   Fade Animation
+==================================*/
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(10px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* ===============================
+   Responsive
+==================================*/
+@media(max-width:768px){
+
+    .container{
+        padding:10px;
+    }
+
+    .chat-box{
+        width:100%;
+        height:95vh;
+        border-radius:0;
+    }
+
+    .header h1{
+        font-size:24px;
+    }
+
+    .message{
+        max-width:85%;
+        font-size:14px;
+    }
+
+    .input-area{
+        padding:12px;
+    }
+
+    .input-area input{
+        padding:12px;
+        font-size:14px;
+    }
+
+    .input-area button{
+        padding:12px 18px;
+        font-size:14px;
+    }
+}
+
+@media(max-width:480px){
+
+    .header{
+        padding:15px;
+    }
+
+    .header h1{
+        font-size:22px;
+    }
+
+    .header p{
+        font-size:12px;
+    }
+
+    .message{
+        font-size:13px;
+        padding:10px 14px;
+    }
+
+    .input-area input{
+        font-size:13px;
+    }
+
+    .input-area button{
+        font-size:13px;
+        padding:10px 15px;
+    }
+}
