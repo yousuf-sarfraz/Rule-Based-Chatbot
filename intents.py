@@ -448,7 +448,7 @@ intents = [
         "patterns": [
             "what is lemmatization",
             "explain lemmatization",
-            "why do you use lemmatization",
+            "hy do you use lemmatization",
             "what does lemmatization do",
             "how does lemmatization work"
         ],
