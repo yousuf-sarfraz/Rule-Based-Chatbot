@@ -1,75 +1,75 @@
-# Rule-Based-Chatbot
-A simple and interactive Rule-Based Chatbot built with Python and Flask. The chatbot responds to user queries using predefined rules and keyword matching, making it a great beginner project for learning the basics of conversational AI.
-# 🤖 RuleBot - Rule-Based Chatbot
+# 🤖 RuleBot - NLP Rule-Based Chatbot
 
-![Python](https://img.shields.io/badge/Python-3.x-blue?logo=python)
-![Flask](https://img.shields.io/badge/Flask-Web%20Framework-black?logo=flask)
-![HTML5](https://img.shields.io/badge/HTML-5-orange?logo=html5)
-![CSS3](https://img.shields.io/badge/CSS-3-blue?logo=css3)
-![JavaScript](https://img.shields.io/badge/JavaScript-ES6-yellow?logo=javascript)
-![License](https://img.shields.io/badge/License-MIT-green)
+A modern and interactive **Rule-Based NLP Chatbot** built with **Python, Flask, NLTK, and Scikit-learn**.
 
-A modern **Rule-Based Chatbot** built using **Python** and **Flask**. The chatbot responds to user queries using predefined rules and keyword matching instead of machine learning, making it lightweight, fast, and easy to understand.
+RuleBot uses **Natural Language Processing (NLP)** to preprocess user messages and **TF-IDF with cosine similarity** to identify the most relevant intent and return an appropriate response.
+
+This project is designed as an educational chatbot project demonstrating how NLP techniques can be combined with a Flask web application.
 
 ---
 
 ## 📌 Features
 
 - 🤖 Rule-Based Chatbot
-- 💬 Interactive Chat Interface
-- ⚡ Fast Response Time
+- 🧠 Natural Language Processing (NLP)
+- 🔤 Text Tokenization using NLTK
+- 🛑 Stopword Removal
+- 🌱 Word Lemmatization
+- 📊 TF-IDF Vectorization
+- 📐 Cosine Similarity
+- 🎯 Intent Recognition
+- 📈 Confidence Score
+- 💬 Predefined Intent Responses
+- 🎲 Random Response Selection
 - 🌐 Flask Web Application
-- 🎨 Modern Responsive UI
+- 🎨 Modern Responsive User Interface
 - 📱 Mobile-Friendly Design
-- 🔍 Keyword Matching
-- 🎲 Random Responses
-- 📅 Date & Time Support
-- 🧠 AI, Python & Flask Knowledge
-- ⌨️ Press Enter to Send Messages
-- 🔄 Typing Animation
-- 📜 Auto Scrolling Chat
-- 🛡 Error Handling
-- 🧩 Easy to Extend
+- ⌨️ Interactive Chat Input
+- ⏳ Typing Indicator
+- 📜 Automatic Chat Scrolling
+- 🛡️ Input Validation
+- ⚠️ Error Handling
+- 🧩 Easy to Extend with New Intents
 
 ---
 
-## 🛠 Technologies Used
+## 🧠 How RuleBot Works
 
-- Python
-- Flask
-- HTML5
-- CSS3
-- JavaScript
-- JSON
-
----
-
-## 📂 Project Structure
+RuleBot follows an NLP-based text matching process.
 
 ```text
-Rule-Based-Chatbot/
-│
-├── app.py
-├── chatbot.py
-├── intents.py
-├── requirements.txt
-├── README.md
-│
-├── templates/
-│   └── index.html
-│
-├── static/
-│   ├── style.css
-│   └── script.js
-│
-└── screenshots/
-    └── chatbot-home.png
-```
-
----
-
-## 👨‍💻 Author
-
-**Yousuf Sarfraz**
-
-Computer Science Student
+User Message
+     │
+     ▼
+Text Preprocessing
+     │
+     ├── Lowercase Conversion
+     ├── Punctuation Removal
+     ├── Tokenization
+     ├── Stopword Removal
+     └── Lemmatization
+     │
+     ▼
+TF-IDF Vectorization
+     │
+     ▼
+Cosine Similarity
+     │
+     ▼
+Best Matching Pattern
+     │
+     ▼
+Intent Recognition
+     │
+     ▼
+Confidence Check
+     │
+     ├── Good Match
+     │      │
+     │      ▼
+     │   Response
+     │
+     └── Poor Match
+            │
+            ▼
+       Default Response
