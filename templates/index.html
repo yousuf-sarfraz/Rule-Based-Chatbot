@@ -1,58 +1,258 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- =====================================================
+         BASIC META INFORMATION
+    ====================================================== -->
 
-<title>RuleBot</title>
+    <meta charset="UTF-8">
 
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
+    <meta name="description"
+          content="RuleBot - A Python NLP chatbot using Flask, NLTK, TF-IDF and cosine similarity.">
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <meta name="author"
+          content="Yousuf Sarfraz">
+
+    <meta name="theme-color"
+          content="#111827">
+
+    <title>RuleBot | NLP Virtual Assistant</title>
+
+
+    <!-- =====================================================
+         GOOGLE FONT
+    ====================================================== -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+
+    <!-- =====================================================
+         CUSTOM CSS
+    ====================================================== -->
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
 
 </head>
 
+
 <body>
 
-<div class="container">
+    <!-- =====================================================
+         MAIN APPLICATION
+    ====================================================== -->
 
-<div class="chat-box">
+    <main class="container">
 
-<div class="header">
-🤖 RuleBot
-<p>Your AI Assistant</p>
-</div>
+        <section class="chat-box"
+                 aria-label="RuleBot chatbot">
 
-<div id="chat-area">
 
-<div class="bot message">
-Hello 👋<br>
-I'm RuleBot.<br>
-How can I help you today?
-</div>
+            <!-- =================================================
+                 CHATBOT HEADER
+            ================================================== -->
 
-</div>
+            <header class="header">
 
-<div class="input-area">
+                <div class="bot-profile">
 
-<input
-type="text"
-id="message"
-placeholder="Type your message..."
-autocomplete="off">
+                    <div class="bot-icon"
+                         aria-hidden="true">
 
-<button onclick="sendMessage()">Send</button>
+                        🤖
 
-</div>
+                    </div>
 
-</div>
+                    <div class="bot-info">
 
-</div>
+                        <h1>
+                            RuleBot
+                        </h1>
 
-<script src="{{ url_for('static', filename='script.js') }}"></script>
+                        <p>
+                            NLP Virtual Assistant
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="bot-status"
+                     aria-label="RuleBot status">
+
+                    <span class="status-dot"
+                          aria-hidden="true">
+                    </span>
+
+                    <span>
+                        Online
+                    </span>
+
+                </div>
+
+            </header>
+
+
+            <!-- =================================================
+                 CHAT INFORMATION
+            ================================================== -->
+
+            <div class="chat-info">
+
+                <p>
+                    Ask me about Python, Flask, AI, NLP,
+                    Machine Learning, or how I work.
+                </p>
+
+            </div>
+
+
+            <!-- =================================================
+                 CHAT AREA
+            ================================================== -->
+
+            <div id="chat-area"
+                 class="chat-area"
+                 aria-live="polite"
+                 aria-label="Chat messages">
+
+
+                <!-- =============================================
+                     INITIAL BOT MESSAGE
+                ============================================== -->
+
+                <div class="message bot">
+
+                    <span class="message-sender">
+                        RuleBot
+                    </span>
+
+                    <div class="message-content">
+
+                        <p>
+                            Hello! 👋
+                        </p>
+
+                        <p>
+                            I'm <strong>RuleBot</strong>, your
+                            NLP virtual assistant.
+                        </p>
+
+                        <p>
+                            How can I help you today?
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 TYPING / STATUS AREA
+            ================================================== -->
+
+            <div id="typing-indicator"
+                 class="typing-indicator"
+                 aria-live="polite"
+                 aria-hidden="true">
+
+                <span>RuleBot is typing</span>
+
+                <span class="typing-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </span>
+
+            </div>
+
+
+            <!-- =================================================
+                 INPUT AREA
+            ================================================== -->
+
+            <form class="input-area"
+                  id="chat-form"
+                  autocomplete="off">
+
+                <label for="message"
+                       class="sr-only">
+
+                    Enter your message
+
+                </label>
+
+                <input
+                    type="text"
+                    id="message"
+                    name="message"
+                    placeholder="Ask RuleBot something..."
+                    autocomplete="off"
+                    maxlength="500"
+                    spellcheck="true"
+                    required
+                >
+
+                <button
+                    type="submit"
+                    id="send-button"
+                    aria-label="Send message">
+
+                    <span>
+                        Send
+                    </span>
+
+                    <span aria-hidden="true">
+                        ➤
+                    </span>
+
+                </button>
+
+            </form>
+
+
+            <!-- =================================================
+                 FOOTER
+            ================================================== -->
+
+            <footer class="chat-footer">
+
+                <span>
+                    Powered by
+                    <strong>Python</strong> ·
+                    <strong>Flask</strong> ·
+                    <strong>NLTK</strong> ·
+                    <strong>TF-IDF</strong>
+                </span>
+
+            </footer>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 
 </body>
+
 </html>
