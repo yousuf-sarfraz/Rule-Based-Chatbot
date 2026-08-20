@@ -19,7 +19,13 @@ intents = [
             "nice to meet you",
             "hello rulebot",
             "hi rulebot",
-            "hey rulebot"
+            "hey rulebot",
+            "hello chatbot",
+            "hi chatbot",
+            "hey chatbot",
+            "greetings",
+            "hi there rulebot",
+            "hello there rulebot"
         ],
         "responses": [
             "👋 Hello! How can I help you today?",
@@ -44,7 +50,13 @@ intents = [
             "how are things",
             "are you doing well",
             "are you okay",
-            "how do you feel"
+            "how do you feel",
+            "are you fine",
+            "are you doing okay",
+            "how have you been",
+            "how is everything going",
+            "are you good",
+            "how are things going"
         ],
         "responses": [
             "I'm doing great! Thanks for asking 😊",
@@ -64,13 +76,21 @@ intents = [
         "patterns": [
             "what is your name",
             "what's your name",
+            "what is the name of this chatbot",
+            "what is the chatbot name",
+            "what should I call you",
+            "what can I call you",
             "tell me your name",
-            "your name",
+            "tell me the name of the chatbot",
             "who are you",
-            "what are you",
             "who is rulebot",
+            "what is rulebot",
+            "what are you",
+            "are you rulebot",
+            "is this rulebot",
             "tell me about yourself",
-            "introduce yourself"
+            "introduce yourself",
+            "can you introduce yourself"
         ],
         "responses": [
             "I'm RuleBot, your virtual assistant.",
@@ -89,17 +109,24 @@ intents = [
         "tag": "capabilities",
         "patterns": [
             "what can you do",
-            "what are your capabilities",
-            "what can you help me with",
-            "what do you do",
-            "what are you able to do",
-            "what services do you provide",
             "what can rulebot do",
-            "what questions can you answer",
+            "what can this chatbot do",
+            "what are your capabilities",
+            "what are rulebot's capabilities",
+            "what can you help me with",
             "how can you help me",
-            "what kind of questions can i ask",
+            "what do you help with",
+            "what questions can you answer",
+            "what kind of questions can I ask",
+            "what topics can you answer",
+            "what topics do you support",
+            "what services do you provide",
+            "what are you able to do",
+            "what features do you have",
+            "what functions do you provide",
             "tell me your capabilities",
-            "tell me what you can do"
+            "tell me what you can do",
+            "what can I ask you"
         ],
         "responses": [
             "I can answer questions from my knowledge base, process your text using NLP, identify user intents, and provide relevant responses.",
@@ -120,14 +147,23 @@ intents = [
             "how do you work",
             "how does rulebot work",
             "how does this chatbot work",
+            "how does the chatbot work",
+            "explain how rulebot works",
             "explain how you work",
             "how do you answer questions",
+            "how does rulebot answer questions",
             "how do you understand questions",
             "how do you understand my message",
+            "how does rulebot understand messages",
             "how do you find answers",
             "how does the system work",
+            "explain the working of rulebot",
             "explain your working",
-            "how does your nlp work"
+            "how does your nlp work",
+            "how does your question matching work",
+            "how do you match user questions",
+            "how do you select an answer",
+            "how do you choose a response"
         ],
         "responses": [
             "I preprocess your message with NLTK, convert it into TF-IDF features, compare it with stored patterns using cosine similarity, and select the most relevant response.",
@@ -155,8 +191,17 @@ intents = [
             "who developed rulebot",
             "who created rulebot",
             "who made rulebot",
+            "who built rulebot",
+            "who programmed rulebot",
+            "who is the developer of rulebot",
+            "who is the creator of rulebot",
+            "who is the programmer of rulebot",
+            "who developed this chatbot",
+            "who created this chatbot",
             "tell me about your developer",
-            "developer of rulebot"
+            "tell me about your creator",
+            "developer of rulebot",
+            "creator of rulebot"
         ],
         "responses": [
             "I was developed by Yousuf Sarfraz using Python, Flask, NLTK, and Scikit-learn.",
@@ -176,15 +221,25 @@ intents = [
             "what technology do you use",
             "what technologies do you use",
             "what technology are you built with",
+            "what technologies are you built with",
             "what tools do you use",
             "what programming language do you use",
-            "what is your technology",
-            "what technologies are used",
+            "what programming languages do you use",
+            "what is your technology stack",
+            "what is your tech stack",
+            "what technologies are used in rulebot",
+            "what technologies are used in this chatbot",
             "what software do you use",
             "what framework do you use",
             "what libraries do you use",
-            "what is your tech stack",
-            "tell me about your technology"
+            "what python libraries do you use",
+            "what technology powers rulebot",
+            "what is rulebot built with",
+            "what is this chatbot built with",
+            "which technologies does rulebot use",
+            "which tools were used to build rulebot",
+            "tell me about your technology",
+            "tell me about your tech stack"
         ],
         "responses": [
             "I use Python, Flask, NLTK, and Scikit-learn. My NLP system uses TF-IDF vectorization and cosine similarity for question matching.",
@@ -202,17 +257,26 @@ intents = [
         "tag": "purpose",
         "patterns": [
             "what is your purpose",
-            "why were you created",
             "what is the purpose of rulebot",
+            "what is the purpose of this chatbot",
+            "what is rulebot designed for",
+            "what is this chatbot designed for",
+            "why were you created",
+            "why was rulebot created",
+            "why was this chatbot created",
             "why do you exist",
+            "why does rulebot exist",
             "what are you designed for",
             "what is your goal",
-            "why was rulebot created",
+            "what is the goal of rulebot",
             "what is the goal of this chatbot",
             "what is this chatbot used for",
-            "what is the purpose of this chatbot",
+            "what is rulebot used for",
             "why did you build this chatbot",
-            "tell me your purpose"
+            "why was this chatbot built",
+            "what problem does rulebot solve",
+            "tell me your purpose",
+            "tell me the purpose of rulebot"
         ],
         "responses": [
             "My purpose is to demonstrate how a Python-based NLP chatbot can understand user questions and provide relevant responses.",
@@ -230,12 +294,20 @@ intents = [
         "tag": "nlp",
         "patterns": [
             "what is nlp",
-            "what is natural language processing",
-            "explain nlp",
-            "tell me about nlp",
             "what does nlp mean",
+            "what is natural language processing",
+            "what does natural language processing mean",
+            "explain nlp",
+            "explain natural language processing",
+            "tell me about nlp",
+            "tell me about natural language processing",
             "how is nlp used",
-            "what is natural language processing used for"
+            "how is natural language processing used",
+            "what is nlp used for",
+            "what is natural language processing used for",
+            "why is nlp important",
+            "why is natural language processing important",
+            "how does nlp help computers"
         ],
         "responses": [
             "NLP stands for Natural Language Processing. It is a field of AI that helps computers process and understand human language.",
@@ -254,11 +326,22 @@ intents = [
         "patterns": [
             "what is tf idf",
             "what is tfidf",
+            "what does tf idf mean",
+            "what does tfidf mean",
+            "explain tf idf",
             "explain tfidf",
             "what is tf idf vectorization",
+            "what is tfidf vectorization",
             "how does tfidf work",
+            "how does tf idf work",
             "why do you use tfidf",
-            "what does tfidf do"
+            "why is tfidf used",
+            "why does rulebot use tfidf",
+            "what does tfidf do",
+            "what does tf idf do",
+            "how does tfidf help rulebot",
+            "how does tf idf help with matching",
+            "how does tfidf convert text"
         ],
         "responses": [
             "TF-IDF stands for Term Frequency-Inverse Document Frequency. It converts text into numerical features based on the importance of words.",
@@ -276,12 +359,21 @@ intents = [
         "tag": "cosine_similarity",
         "patterns": [
             "what is cosine similarity",
+            "what does cosine similarity mean",
             "explain cosine similarity",
             "how does cosine similarity work",
             "why do you use cosine similarity",
+            "why is cosine similarity used",
+            "why does rulebot use cosine similarity",
             "what is similarity matching",
             "how do you compare questions",
-            "how do you match questions"
+            "how do you compare user questions",
+            "how do you match questions",
+            "how does rulebot compare questions",
+            "how does rulebot match questions",
+            "how does cosine similarity help rulebot",
+            "how is similarity calculated",
+            "what does the similarity score mean"
         ],
         "responses": [
             "Cosine similarity measures how similar two text vectors are. I use it to compare your question with my stored patterns.",
@@ -299,11 +391,19 @@ intents = [
         "tag": "nltk",
         "patterns": [
             "what is nltk",
+            "what does nltk mean",
             "what does nltk do",
-            "why do you use nltk",
             "explain nltk",
+            "tell me about nltk",
+            "why do you use nltk",
+            "why is nltk used",
+            "why does rulebot use nltk",
             "what is natural language toolkit",
-            "how is nltk used in this chatbot"
+            "what does natural language toolkit mean",
+            "how is nltk used in this chatbot",
+            "how does nltk help rulebot",
+            "what does nltk do in rulebot",
+            "what is nltk used for"
         ],
         "responses": [
             "NLTK stands for Natural Language Toolkit. It is a Python library used for Natural Language Processing.",
@@ -320,12 +420,20 @@ intents = [
         "tag": "python",
         "patterns": [
             "what is python",
+            "what does python mean",
             "tell me about python",
             "explain python",
             "what is python programming",
+            "what is the python programming language",
             "why is python popular",
+            "why is python widely used",
             "what is python used for",
-            "where is python used"
+            "where is python used",
+            "what can python be used for",
+            "why does rulebot use python",
+            "why is python used in rulebot",
+            "how is python used in this chatbot",
+            "what are the advantages of python"
         ],
         "responses": [
             "Python is a powerful programming language used in AI, web development, automation, data science, and many other fields.",
@@ -342,12 +450,19 @@ intents = [
         "tag": "flask",
         "patterns": [
             "what is flask",
+            "what does flask mean",
             "tell me about flask",
             "explain flask",
             "what is flask framework",
+            "what is the flask framework",
             "why do you use flask",
+            "why is flask used",
+            "why does rulebot use flask",
             "what is flask used for",
-            "how is flask used in this chatbot"
+            "how is flask used in this chatbot",
+            "how does flask help rulebot",
+            "what does flask do in this chatbot",
+            "what can flask be used for"
         ],
         "responses": [
             "Flask is a lightweight Python web framework used to build web applications and APIs.",
@@ -364,12 +479,21 @@ intents = [
         "tag": "ai",
         "patterns": [
             "what is artificial intelligence",
+            "what does artificial intelligence mean",
             "what is ai",
-            "tell me about ai",
-            "explain artificial intelligence",
-            "explain ai",
             "what does ai mean",
-            "how does artificial intelligence work"
+            "tell me about ai",
+            "tell me about artificial intelligence",
+            "explain ai",
+            "explain artificial intelligence",
+            "how does artificial intelligence work",
+            "how does ai work",
+            "what is artificial intelligence used for",
+            "what is ai used for",
+            "why is artificial intelligence important",
+            "why is ai important",
+            "what can artificial intelligence do",
+            "what can ai do"
         ],
         "responses": [
             "Artificial Intelligence is a field of computer science focused on creating systems that can perform tasks that normally require human intelligence.",
@@ -386,12 +510,20 @@ intents = [
         "tag": "machine_learning",
         "patterns": [
             "what is machine learning",
+            "what does machine learning mean",
             "what is ml",
+            "what does ml mean",
             "tell me about machine learning",
             "explain machine learning",
-            "what does machine learning mean",
             "how does machine learning work",
-            "is machine learning ai"
+            "what is machine learning used for",
+            "what is ml used for",
+            "is machine learning ai",
+            "is ml a part of ai",
+            "how is machine learning related to ai",
+            "why is machine learning important",
+            "what can machine learning do",
+            "how does machine learning learn from data"
         ],
         "responses": [
             "Machine Learning is a branch of AI where computers learn patterns from data and use those patterns to make predictions or decisions.",
@@ -408,13 +540,23 @@ intents = [
         "tag": "stopwords",
         "patterns": [
             "what are stopwords",
+            "what are stop words",
+            "what is a stopword",
             "what is stopword removal",
+            "what is stop word removal",
+            "explain stopwords",
+            "explain stop words",
             "why remove stopwords",
+            "why remove stop words",
             "why do you remove stopwords",
-            "how are stopwords used"
+            "why do you remove stop words",
+            "how are stopwords used",
+            "how are stop words used",
+            "what does stopword removal do",
+            "what does stop word removal do"
         ],
         "responses": [
-            "Stopwords are common words that may provide little useful information for text matching. NLTK can remove them during preprocessing.",
+            "Stopwords are common words that may provide little useful information for text matching. NLTK can remove them during text matching.",
             "My preprocessing uses an English stopword list to reduce unnecessary words before text matching."
         ]
     },
@@ -428,10 +570,18 @@ intents = [
         "tag": "tokenization",
         "patterns": [
             "what is tokenization",
-            "what is tokenization in nlp",
+            "what does tokenization mean",
             "explain tokenization",
+            "tell me about tokenization",
+            "what is tokenization in nlp",
+            "what is text tokenization",
             "why do you tokenize text",
-            "how does tokenization work"
+            "why is tokenization used",
+            "how does tokenization work",
+            "how does text tokenization work",
+            "what does tokenization do",
+            "how is tokenization used in this chatbot",
+            "how does nltk tokenize text"
         ],
         "responses": [
             "Tokenization breaks text into smaller units called tokens, usually words or sentences. This chatbot uses NLTK word tokenization."
@@ -447,10 +597,17 @@ intents = [
         "tag": "lemmatization",
         "patterns": [
             "what is lemmatization",
+            "what does lemmatization mean",
             "explain lemmatization",
-            "hy do you use lemmatization",
+            "tell me about lemmatization",
+            "why do you use lemmatization",
+            "why is lemmatization used",
+            "how does lemmatization work",
             "what does lemmatization do",
-            "how does lemmatization work"
+            "what is lemmatization in nlp",
+            "how is lemmatization used in this chatbot",
+            "why does rulebot use lemmatization",
+            "how does lemmatization help text matching"
         ],
         "responses": [
             "Lemmatization reduces words to their base or dictionary form. This helps similar words match more effectively during text processing."
@@ -470,8 +627,15 @@ intents = [
             "thankyou",
             "thanks a lot",
             "thank you so much",
+            "thank you very much",
             "i appreciate it",
-            "that was helpful"
+            "i appreciate your help",
+            "that was helpful",
+            "this was helpful",
+            "you helped me",
+            "thanks for your help",
+            "thanks for helping me",
+            "many thanks"
         ],
         "responses": [
             "You're welcome! 😊",
@@ -495,8 +659,15 @@ intents = [
             "see you later",
             "talk to you later",
             "i have to go",
+            "i need to go",
+            "i am leaving",
             "exit",
-            "quit"
+            "quit",
+            "end the chat",
+            "end conversation",
+            "stop chatting",
+            "good night",
+            "see you next time"
         ],
         "responses": [
             "👋 Goodbye!",

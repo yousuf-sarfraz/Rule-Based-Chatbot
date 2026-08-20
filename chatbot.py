@@ -2,7 +2,6 @@ import re
 import random
 import nltk
 
-from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
 
@@ -16,7 +15,6 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 nltk.download("punkt", quiet=True)
 nltk.download("punkt_tab", quiet=True)
-nltk.download("stopwords", quiet=True)
 nltk.download("wordnet", quiet=True)
 
 
@@ -33,7 +31,6 @@ class FAQChatbot:
         # ----------------------------------------------------
 
         self.lemmatizer = WordNetLemmatizer()
-        self.stop_words = set(stopwords.words("english"))
 
         # ----------------------------------------------------
         # Store intents
@@ -42,7 +39,7 @@ class FAQChatbot:
         self.intents = intents
 
         # ----------------------------------------------------
-        # Create lists for patterns, responses and tags
+        # Create pattern data
         # ----------------------------------------------------
 
         self.patterns = []
@@ -50,7 +47,7 @@ class FAQChatbot:
         self.tags = []
 
         # ----------------------------------------------------
-        # Extract information from intents.py
+        # Extract patterns, responses and tags
         # ----------------------------------------------------
 
         for intent in intents:
@@ -75,23 +72,38 @@ class FAQChatbot:
 
         # ----------------------------------------------------
         # TF-IDF Vectorizer
+        #
+        # 1,2,3 means:
+        #   single words
+        #   two-word phrases
+        #   three-word phrases
+        #
+        # This gives more importance to complete phrases.
         # ----------------------------------------------------
 
         self.vectorizer = TfidfVectorizer(
-            ngram_range=(1, 2),
+            ngram_range=(1, 3),
             sublinear_tf=True
         )
 
+        # ----------------------------------------------------
         # Convert patterns into TF-IDF vectors
+        # ----------------------------------------------------
+
         self.tfidf_matrix = self.vectorizer.fit_transform(
             self.cleaned_patterns
         )
 
         # ----------------------------------------------------
-        # Similarity threshold
+        # Matching configuration
         # ----------------------------------------------------
 
-        self.threshold = 0.25
+        # Minimum similarity required for a match.
+        self.threshold = 0.45
+
+        # Difference required between the best and second-best
+        # match when the result is not an exact match.
+        self.margin_threshold = 0.08
 
     # ========================================================
     # TEXT PREPROCESSING
@@ -100,59 +112,84 @@ class FAQChatbot:
     def preprocess(self, text):
 
         # ----------------------------------------------------
-        # 1. Convert text to lowercase
+        # 1. Convert to lowercase
         # ----------------------------------------------------
 
-        text = text.lower()
+        text = text.lower().strip()
 
         # ----------------------------------------------------
         # 2. Remove punctuation
         # ----------------------------------------------------
 
-        text = re.sub(r"[^\w\s]", "", text)
+        text = re.sub(r"[^\w\s]", " ", text)
 
         # ----------------------------------------------------
-        # 3. Tokenize text
+        # 3. Tokenize
         # ----------------------------------------------------
 
         tokens = word_tokenize(text)
 
         # ----------------------------------------------------
-        # 4. Remove stopwords
-        # 5. Apply lemmatization
+        # 4. Lemmatize
+        #
+        # IMPORTANT:
+        # We DO NOT remove stopwords here.
+        #
+        # Words such as:
+        # "what", "is", "your", "who", "are"
+        #
+        # can be important for distinguishing intents.
         # ----------------------------------------------------
 
         cleaned_tokens = [
             self.lemmatizer.lemmatize(word)
             for word in tokens
-            if word not in self.stop_words
         ]
 
         # ----------------------------------------------------
-        # IMPORTANT:
-        # If all words were stopwords, keep original words.
-        #
-        # Example:
-        # "how are you"
-        #
-        # NLTK may remove:
-        # how, are, you
-        #
-        # Without this fallback the result becomes empty.
-        # ----------------------------------------------------
-
-        if not cleaned_tokens:
-
-            cleaned_tokens = [
-                self.lemmatizer.lemmatize(word)
-                for word in tokens
-            ]
-
-        # ----------------------------------------------------
-        # 6. Convert tokens back into text
+        # 5. Convert tokens back into text
         # ----------------------------------------------------
 
         return " ".join(cleaned_tokens)
+
+    # ========================================================
+    # EXACT MATCH
+    # ========================================================
+
+    def find_exact_match(self, user_input):
+
+        cleaned_input = self.preprocess(user_input)
+
+        for index, pattern in enumerate(self.cleaned_patterns):
+
+            if cleaned_input == pattern:
+
+                return index
+
+        return None
+
+    # ========================================================
+    # DEFAULT RESPONSE
+    # ========================================================
+
+    def get_default_response(self):
+
+        default_response = (
+            "Sorry, I don't understand that yet. "
+            "Could you rephrase your question?"
+        )
+
+        for intent in self.intents:
+
+            if intent["tag"] == "default":
+
+                default_response = random.choice(
+                    intent["responses"]
+                )
+
+                break
+
+        return default_response
 
     # ========================================================
     # GET CHATBOT RESPONSE
@@ -173,34 +210,50 @@ class FAQChatbot:
             }
 
         # ----------------------------------------------------
-        # Preprocess user's question
+        # Preprocess user input
         # ----------------------------------------------------
 
         cleaned_input = self.preprocess(user_input)
 
         # ----------------------------------------------------
-        # Check if preprocessing produced empty text
+        # Check preprocessing result
         # ----------------------------------------------------
 
         if not cleaned_input:
 
             return {
-                "response": "I'm sorry, I couldn't process your question.",
+                "response": self.get_default_response(),
                 "confidence": 0,
-                "intent": "unknown"
+                "intent": "default"
             }
 
-        # ----------------------------------------------------
-        # Convert user question into TF-IDF vector
-        # ----------------------------------------------------
+        # ====================================================
+        # STEP 1: EXACT MATCH
+        # ====================================================
+
+        exact_match_index = self.find_exact_match(user_input)
+
+        if exact_match_index is not None:
+
+            possible_responses = self.responses[
+                exact_match_index
+            ]
+
+            return {
+                "response": random.choice(
+                    possible_responses
+                ),
+                "confidence": 1.0,
+                "intent": self.tags[exact_match_index]
+            }
+
+        # ====================================================
+        # STEP 2: TF-IDF MATCHING
+        # ====================================================
 
         user_vector = self.vectorizer.transform(
             [cleaned_input]
         )
-
-        # ----------------------------------------------------
-        # Calculate cosine similarity
-        # ----------------------------------------------------
 
         similarities = cosine_similarity(
             user_vector,
@@ -208,70 +261,91 @@ class FAQChatbot:
         )[0]
 
         # ----------------------------------------------------
-        # Find highest similarity score
+        # Get best and second-best matches
         # ----------------------------------------------------
 
-        best_match_index = similarities.argmax()
+        ranked_indices = similarities.argsort()[::-1]
+
+        best_match_index = ranked_indices[0]
 
         highest_score = float(
             similarities[best_match_index]
         )
 
         # ----------------------------------------------------
-        # Get matching intent
+        # Get second-best score
         # ----------------------------------------------------
 
-        best_tag = self.tags[best_match_index]
+        if len(ranked_indices) > 1:
 
-        # ----------------------------------------------------
-        # Check similarity threshold
-        # ----------------------------------------------------
+            second_best_index = ranked_indices[1]
 
-        if highest_score >= self.threshold:
-
-            # Get possible responses
-            possible_responses = self.responses[
-                best_match_index
-            ]
-
-            # Select random response
-            response = random.choice(
-                possible_responses
+            second_best_score = float(
+                similarities[second_best_index]
             )
 
+        else:
+
+            second_best_score = 0.0
+
+        # ----------------------------------------------------
+        # Calculate difference between top matches
+        # ----------------------------------------------------
+
+        score_margin = (
+            highest_score - second_best_score
+        )
+
+        # ====================================================
+        # STEP 3: CHECK WHETHER MATCH IS STRONG ENOUGH
+        # ====================================================
+
+        if highest_score < self.threshold:
+
             return {
-                "response": response,
-                "confidence": round(highest_score, 2),
-                "intent": best_tag
+                "response": self.get_default_response(),
+                "confidence": round(
+                    highest_score,
+                    2
+                ),
+                "intent": "default"
             }
 
         # ----------------------------------------------------
-        # No good match:
-        # Use default intent
+        # If two intents are almost equally similar,
+        # don't make a risky prediction.
         # ----------------------------------------------------
 
-        default_response = (
-            "Sorry, I don't understand that yet. "
-            "Could you rephrase your question?"
+        if score_margin < self.margin_threshold:
+
+            return {
+                "response": self.get_default_response(),
+                "confidence": round(
+                    highest_score,
+                    2
+                ),
+                "intent": "default"
+            }
+
+        # ====================================================
+        # STEP 4: RETURN BEST MATCH
+        # ====================================================
+
+        best_tag = self.tags[best_match_index]
+
+        possible_responses = self.responses[
+            best_match_index
+        ]
+
+        response = random.choice(
+            possible_responses
         )
 
-        # Search for default intent
-        for intent in self.intents:
-
-            if intent["tag"] == "default":
-
-                default_response = random.choice(
-                    intent["responses"]
-                )
-
-                break
-
-        # ----------------------------------------------------
-        # Return default response
-        # ----------------------------------------------------
-
         return {
-            "response": default_response,
-            "confidence": round(highest_score, 2),
-            "intent": "default"
+            "response": response,
+            "confidence": round(
+                highest_score,
+                2
+            ),
+            "intent": best_tag
         }
